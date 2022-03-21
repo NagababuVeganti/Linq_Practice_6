@@ -99,7 +99,7 @@ namespace WebApplication1
 
             }).ToList();
 
-            ViewData["title"] = "Sum of all studnet Scores Grouped By College";
+            ViewData["title"] = "Sum of all students Scores Grouped By College";
 
             ViewData["data"] = group_data;
 
