@@ -23,21 +23,23 @@ namespace WebApplication1
         public async Task<IActionResult> Queries()
         {
 
-           /*
-            //Select All records in the Enrollments table.
+            /*
+             //Query 1: Select Query to get all the records from Enrollments table.
 
-           List<Enrollment> allrecords= dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s=>s.Course.College).ToList();
-            Console.WriteLine("Feteched Records");
-            ViewData["title"] = "All Records";
-            ViewData["data"] = allrecords;
-            return View("data");
-            
-            */
-            
 
-           
+             List<Enrollment> allrecords= dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s=>s.Course.College).ToList();
+             Console.WriteLine("Feteched Records");
+             ViewData["title"] = "All Records";
+             ViewData["data"] = allrecords;
+             return View("data");
 
-            //Select All records in the Enrollments table for student Ross.
+             */
+
+
+
+
+            // Query 2:Select All records in the Enrollments table for a particular student   (Example: Name:Ross).
+
 
             List<Enrollment> ross_records = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).Where(s => s.Student.Name.Equals("Ross")).ToList();
             Console.WriteLine("Feteched Records for Ross");
@@ -45,18 +47,14 @@ namespace WebApplication1
             ViewData["data"] = ross_records;
             return View("data");
 
-            
-
-
-
 
             /*
 
              //Task for Students to query based on Course Abbreviation
 
-             //Select All records in the Enrollments table with  college Abbreviation "CoE"
+             // Quer 3: Select All records in the Enrollments table with a givencollege Abbreviation (Example Abbreviation:”CoE”)
 
-             List<Enrollment> MCOB_records = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).Where(s => s.Course.College.Abbreviation.Contains("CoE")).ToList();
+             List<Enrollment> CoE_records = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).Where(s => s.Course.College.Abbreviation.Contains("CoE")).ToList();
              Console.WriteLine("Feteched Records for MCOB College");
              ViewData["title"] = "Records of MCOB College:";
              ViewData["data"] = MCOB_records;
@@ -68,7 +66,7 @@ namespace WebApplication1
 
             /* 
 
-            // Group By Query on Student Name and College Abbrevation.
+            // Query 4: Group By Query on Enrollments table to get the total scores grouped on student Name and College Abbreviation
 
             var group_data = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).GroupBy(s => new { s.Student.Name, s.Course.College.Abbreviation }).Select(s => new
             {
@@ -92,7 +90,7 @@ namespace WebApplication1
              
             //Excercise for Student 
 
-            // Write a Group by Query to get sum of total scores by College Name or College Abbrevation.
+            // Query 5: Group by Query on Enrollments table to get sum of total scores of all students by College Name or College Abbreviation.
            
             var group_data = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).GroupBy(s => new { s.Course.College.Name }).Select(s => new
             {
