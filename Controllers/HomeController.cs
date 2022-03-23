@@ -24,8 +24,40 @@ namespace WebApplication1
         {
 
             /*
-             //Query 1: Select Query to get all the records from Enrollments table.
+             
+            //Query 1 Basic Select
 
+            //Get all the records from Enrollments table.
+
+            List<Enrollment> allrecords = dbContext.Enrollments.ToList();
+            Console.WriteLine("Feteched sll Records");
+            ViewData["title"] = "All Records";
+            ViewData["data"] = allrecords;
+            return View("allrecords");
+
+            */
+
+
+            /*
+             
+            //Query 2: Select with filter(where).
+
+            //Get all the records from Enrollments table with A Grade.
+
+            List<Enrollment> allrecords = dbContext.Enrollments.Where(c=>c.Grade.Equals("A")).ToList();
+            Console.WriteLine("Feteched qll Records with A Grade");
+            ViewData["title"] = "All Records with A Grade";
+            ViewData["data"] = allrecords;
+            return View("allrecords");
+             
+            */
+
+
+
+            /* 
+
+            // Query 3: Select Query to get all the records from Enrollments table.
+            
 
              List<Enrollment> allrecords= dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s=>s.Course.College).ToList();
              Console.WriteLine("Feteched Records");
@@ -33,26 +65,29 @@ namespace WebApplication1
              ViewData["data"] = allrecords;
              return View("data");
 
-             */
+            */
 
 
+            /*
+           
+
+            // Query 4:Select All records in the Enrollments table with Student and course information for the Course number ISM 6225.
 
 
-            // Query 2:Select All records in the Enrollments table for a particular student   (Example: Name:Ross).
-
-
-            List<Enrollment> ross_records = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).Where(s => s.Student.Name.Equals("Ross")).ToList();
-            Console.WriteLine("Feteched Records for Ross");
+            List<Enrollment> ism_records = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).Where(s => s.Course.Number.Contains("ISM 6225")).ToList();
+            Console.WriteLine("Feteched Records for ISM 6225");
             ViewData["title"] = "Records of Ross";
-            ViewData["data"] = ross_records;
+            ViewData["data"] = ism_records;
             return View("data");
+
+           */
+
+
 
 
             /*
 
-             //Task for Students to query based on Course Abbreviation
-
-             // Quer 3: Select All records in the Enrollments table with a givencollege Abbreviation (Example Abbreviation:”CoE”)
+             // Quer 5: Select All records in the Enrollments table with a givencollege Abbreviation (Example Abbreviation:”CoE”)
 
              List<Enrollment> CoE_records = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).Where(s => s.Course.College.Abbreviation.Contains("CoE")).ToList();
              Console.WriteLine("Feteched Records for MCOB College");
@@ -64,9 +99,12 @@ namespace WebApplication1
 
 
 
-            /* 
+           
+            /*
 
-            // Query 4: Group By Query on Enrollments table to get the total scores grouped on student Name and College Abbreviation
+            // Query 6: Group By Query  multiple Columns
+            
+            //Get the total scores for a student across all enrollments by college 
 
             var group_data = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).GroupBy(s => new { s.Student.Name, s.Course.College.Abbreviation }).Select(s => new
             {
@@ -88,9 +126,7 @@ namespace WebApplication1
 
             /*
              
-            //Excercise for Student 
-
-            // Query 5: Group by Query on Enrollments table to get sum of total scores of all students by College Name or College Abbreviation.
+            // Query 7: Group by Query on Enrollments table to get sum of total scores of all students by College Name or College Abbreviation.
            
             var group_data = dbContext.Enrollments.Include(s => s.Student).Include(s => s.Course).Include(s => s.Course.College).GroupBy(s => new { s.Course.College.Name }).Select(s => new
             {

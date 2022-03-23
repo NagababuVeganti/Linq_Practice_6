@@ -15,15 +15,13 @@
     </style>
 </head>
 <h2>@ViewBag.title</h2>
-<h5>Do you see the null values now? what do you think happened</h5>
-
+<h5>Why do you think you are seeing blank(null) values for student and course?</h5>
 <table class="table  table-hover">
   <thead class="thead-dark">
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name</th>
+      <th scope="col">Student</th>
       <th scope="col">Course</th>
-      <th scope="col">College</th>
       <th scope="col">Grade</th>
       <th scope="col">Score</th>
     </tr>
@@ -34,9 +32,8 @@
             {
                 <tr>
                      <th scope="row">@items.Id</th>
-                     <td>@items.Student.Name</td>
-                     <td>@items.Course.Name</td>
-                     <td>@items.Course.College.Name</td>
+                     <td>@items.Student</td>
+                     <td>@items.Course</td>
                      <td>@items.Grade</td>
                      <td>@items.score</td>
                </tr>
